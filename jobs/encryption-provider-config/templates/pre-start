@@ -3,4 +3,4 @@
 set -eu
 
 cp /var/vcap/jobs/encryption-provider-config/config/encryption-config.yml \
-    /var/vcap/jobs/kune-apiserver/config/encryption-config.yml
+    /var/vcap/jobs/kube-apiserver/config/encryption-config.yml

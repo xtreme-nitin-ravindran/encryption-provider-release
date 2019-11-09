@@ -1,0 +1,9 @@
+name: encryption-provider-config
+version: 4+dev.1
+commit_hash: empty
+uncommitted_changes: true
+jobs:
+- name: encryption-provider-config
+  version: c499a47f6ae0bc54cfc05f64edbd7d697fb011f0
+  fingerprint: c499a47f6ae0bc54cfc05f64edbd7d697fb011f0
+  sha1: 2abdcd28195f997bed7b530e2aa93ab44c8aaeb2

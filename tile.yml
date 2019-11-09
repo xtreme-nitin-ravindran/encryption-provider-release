@@ -1,0 +1,35 @@
+---
+name: encryption-provider
+icon_file: logo.png
+label: Brief Text for the Tile Icon
+description: Longer description of the tile's purpose
+packages:
+- name: encryption-provider-config
+  type: bosh-release
+  path: resources/encryption-provider-config.tgz
+
+forms:
+- name: local_encryption
+  label: Local Encryption
+  description: Local Encryption
+  properties:
+  - name: aes_keys
+    type: string_list
+    configurable: true
+    optional: true
+    label: AESCBC keys
+    description: Comma separated list of 32 byte strings for local encryption of etcd 
+
+runtime_configs:
+  - name: encryption-provider-config
+    runtime_config:
+      releases:
+      - name: encryption-provider-config
+        version: "3"
+      addons:
+      - name: encryption-provider-config
+        jobs:
+        - name: encryption-provider-config
+          release: encryption-provider-config
+          properties:
+            aes-keys: ((.properties.aes_keys.parsed_strings))

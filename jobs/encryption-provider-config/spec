@@ -1,0 +1,12 @@
+---
+name: encryption-provider-config
+
+templates: 
+  config/encryption-config.yml.erb: config/encryption-config.yml
+  pre-start: bin/pre-start
+packages: []
+
+properties:
+  aes-keys:
+    description: List of base64 encoded 32 byte keys
+    default: []

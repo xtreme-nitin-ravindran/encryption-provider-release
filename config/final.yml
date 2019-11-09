@@ -1,0 +1,6 @@
+---
+name: encryption-provider-config
+blobstore:
+  provider: local
+  options:
+    blobstore_path: /tmp/test-blobs

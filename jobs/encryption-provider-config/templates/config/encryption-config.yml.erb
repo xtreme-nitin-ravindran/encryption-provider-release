@@ -9,10 +9,6 @@ resources:
     - aescbc:
         keys:
        <% p("aes-keys").each_with_index do |key, index| %> 
-        <% if key.length !=0 %>
-          echo "Length of '<%=key%>' not equal to 32"
-          exit 1
-        <% end %>
         - name: key_<%= index %>
           secret: <%= Base64.encode64(key) %>
        <% end %>

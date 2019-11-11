@@ -3,7 +3,7 @@ name: encryption-provider-config
 
 templates: 
   config/encryption-config.yml.erb: config/encryption-config.yml
-  pre-start: bin/pre-start
+  pre-start.erb: bin/pre-start
   post-deploy.erb: bin/post-deploy
 packages: []
 

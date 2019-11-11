@@ -1,8 +1,8 @@
 ---
 name: encryption-provider
 icon_file: logo.png
-label: Brief Text for the Tile Icon
-description: Longer description of the tile's purpose
+label: PKS encryption provider
+description: AESCBC encryption for etcd
 packages:
 - name: encryption-provider-config
   type: bosh-release
@@ -25,9 +25,13 @@ runtime_configs:
     runtime_config:
       releases:
       - name: encryption-provider-config
-        version: "3"
+        version: ENCRYPTION_PROVIDER_CONFIG_VERSION
       addons:
       - name: encryption-provider-config
+        include:
+          jobs:
+          - name: kube-apiserver
+            release: kubo
         jobs:
         - name: encryption-provider-config
           release: encryption-provider-config

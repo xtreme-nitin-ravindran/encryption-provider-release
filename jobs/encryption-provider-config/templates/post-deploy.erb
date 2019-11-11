@@ -1,0 +1,8 @@
+#! /bin/bash
+[[ -z "${DEBUG:-}" ]] || set -x
+set -eu
+
+<% if spec.bootstrap %>
+    /var/vcap/packages/kubernetes/bin/kubectl get secrets --all-namespaces -o json | \
+    /var/vcap/packages/kubernetes/bin/kubectl replace -f -
+<% end %>

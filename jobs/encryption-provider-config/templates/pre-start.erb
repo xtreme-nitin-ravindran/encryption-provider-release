@@ -1,0 +1,27 @@
+#! /bin/bash
+[[ -z "${DEBUG:-}" ]] || set -x
+set -eu
+
+<% if p("aes-keys").length > 0 %>
+    <% p("aes-keys").each_with_index do |key, index| %> 
+        <% if key.length != 32 %>
+            echo "Length of '<%= key %>' is '<%= key.length %>', should be equal to 32"
+            exit 1
+        <% end %>
+  <% end %>
+<% end %>
+
+cp /var/vcap/jobs/encryption-provider-config/config/encryption-config.yml \
+    /var/vcap/jobs/kube-apiserver/config/encryption-config.yml
+
+if grep -e '^  - "--encryption-provider-config=.*$' /var/vcap/jobs/kube-apiserver/config/bpm.yml;
+then
+    sed -ie \
+        's|^  - "--encryption-provider-config=.*$|  - "--encryption-provider-config=/var/vcap/jobs/kube-apiserver/config/encryption-config.yml"|g' \
+        /var/vcap/jobs/kube-apiserver/config/bpm.yml
+else
+    sed -ie \
+        's|^  args:.*$|&\n  - "--encryption-provider-config=/var/vcap/jobs/kube-apiserver/config/encryption-config.yml"|g' \
+        /var/vcap/jobs/kube-apiserver/config/bpm.yml
+fi
+

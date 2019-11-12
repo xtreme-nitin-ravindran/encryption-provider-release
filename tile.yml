@@ -19,6 +19,11 @@ forms:
     optional: true
     label: AESCBC keys
     description: Comma separated list of 32 byte strings for local encryption of etcd 
+  - name: enabled
+    type: boolean
+    label: Enable etcd encryption
+    description: Enable etcd encryption
+    default: true
 
 runtime_configs:
   - name: encryption-provider-config
@@ -37,3 +42,4 @@ runtime_configs:
           release: encryption-provider-config
           properties:
             aes-keys: ((.properties.aes_keys.parsed_strings))
+            enabled: ((.properties.enabled.value))

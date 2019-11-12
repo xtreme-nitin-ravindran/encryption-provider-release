@@ -11,3 +11,6 @@ properties:
   aes-keys:
     description: List of base64 encoded 32 byte keys
     default: []
+  enabled:
+    description: Enable encryption
+    default: true

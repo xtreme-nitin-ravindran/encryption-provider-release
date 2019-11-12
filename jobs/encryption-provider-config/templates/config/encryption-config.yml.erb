@@ -5,6 +5,9 @@ resources:
   - resources:
     - secrets
     providers:
+<% if ! p("enabled") || p("aes-keys").length == 0 %>
+    - identity: {}
+<% end %>
 <% if p("aes-keys").length > 0 %>
     - aescbc:
         keys:
@@ -12,5 +15,8 @@ resources:
         - name: key_<%= index %>
           secret: <%= Base64.encode64(key) %>
        <% end %>
-<% end %>
+<% if p("enabled") %>
     - identity: {}
+<% end %>
+<% end %>
+   
